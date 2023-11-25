@@ -15,8 +15,6 @@ public class PauseManager : MonoBehaviour
                 obj.GetComponent<Duck>().SetPause(pPause);
             else if (obj.tag == "Enemy")
                 obj.GetComponent<Enemy>().SetPause(pPause);
-            else if (obj.tag == "Bullet")
-                obj.GetComponent<Bullet>().SetPause(pPause);
             else if (obj.tag == "Planet")
                 obj.GetComponent<SpawnPowerPlants>().SetPasue(pPause);
         }
