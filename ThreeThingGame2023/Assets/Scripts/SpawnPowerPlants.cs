@@ -10,10 +10,11 @@ public class SpawnPowerPlants : MonoBehaviour
     public Vector3[] PowerPlantSpawns;
 
     public GameObject powerPlant;
+    public GameObject[] Enemys;
 
-    public int timeInterval = 5;
+    public int timeIntervalPlants = 5, timeIntervalEnemys = 1;
 
-    private float lastSpawnTime;
+    private float lastSpawnTimePlant, lastSpawnTimeEnemy;
 
     private bool pause;
 
@@ -21,11 +22,15 @@ public class SpawnPowerPlants : MonoBehaviour
     void Start()
     {
         pause = false;
-        lastSpawnTime = 0;
+        lastSpawnTimePlant = 0;
+        lastSpawnTimeEnemy = 0;
 
         for(int i = 0; i <= 26; i++)
         {
-            GameObject newObject = Instantiate(powerPlant, PowerPlantSpawns[Random.Range(0, 26)], Quaternion.identity);
+            GameObject newObject = Instantiate(powerPlant, PowerPlantSpawns[Random.Range(0, PowerPlantSpawns.Length)], Quaternion.identity);
+            Vector3 upDirection = (newObject.GetComponent<Transform>().position - GameObject.Find("Planet").GetComponent<Transform>().position).normalized;
+            Quaternion newRotation = Quaternion.Euler(upDirection);
+            newObject.GetComponent<Transform>().rotation = newRotation;
             PauseManager.GetComponent<PauseManager>().AddObject(newObject);
         }
     }
@@ -36,14 +41,24 @@ public class SpawnPowerPlants : MonoBehaviour
         if (pause)
             return;
 
-        if(Time.time - lastSpawnTime >= timeInterval)
+        if(Time.time - lastSpawnTimePlant >= timeIntervalPlants)
         {
-            GameObject newObject = Instantiate(powerPlant, PowerPlantSpawns[Random.Range(0, 26)], Quaternion.identity);
+            GameObject newObject = Instantiate(powerPlant, PowerPlantSpawns[Random.Range(0, PowerPlantSpawns.Length)], Quaternion.identity);
             Vector3 upDirection = (newObject.GetComponent<Transform>().position - GameObject.Find("Planet").GetComponent<Transform>().position).normalized;
-            Quaternion rotation = Quaternion.LookRotation(Vector3.forward, upDirection);
-            newObject.GetComponent<Transform>().rotation = rotation;
+            Quaternion newRotation = Quaternion.Euler(upDirection);
+            newObject.GetComponent<Transform>().rotation = newRotation;
             PauseManager.GetComponent<PauseManager>().AddObject(newObject);
-            lastSpawnTime = Time.time;
+            lastSpawnTimePlant = Time.time;
+        }
+
+        if(Time.time - lastSpawnTimeEnemy >= timeIntervalEnemys)
+        {
+            GameObject newObject = Instantiate(Enemys[Random.Range(0, Enemys.Length)], EnemySpawns[Random.Range(0, EnemySpawns.Length)], Quaternion.identity);
+            Vector3 upDirection = (newObject.GetComponent<Transform>().position - GameObject.Find("Planet").GetComponent<Transform>().position).normalized;
+            Quaternion newRotation = Quaternion.Euler(upDirection);
+            newObject.GetComponent<Transform>().rotation = newRotation;
+            PauseManager.GetComponent<PauseManager>().AddObject(newObject);
+            lastSpawnTimeEnemy = Time.time;
         }
     }
 
