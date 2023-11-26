@@ -8,7 +8,6 @@ public class Duck : MonoBehaviour
     private Vector3 gravity;
 
     private GameObject Planet;
-    private Transform transform;
 
     private int health, radiation, radiationNextLevel;
     private bool pause;
@@ -32,8 +31,6 @@ public class Duck : MonoBehaviour
         health = 100;
         radiation = 0;
         radiationNextLevel = 25;
-
-        transform = GetComponent<Transform>();
 
         gravity = new Vector3(0, 0, 0);
         Planet = GameObject.Find("Planet");
