@@ -106,7 +106,7 @@ public class Duck : MonoBehaviour
         if(other.gameObject.tag == "Radiation")
         {
             Destroy(other.gameObject);
-            AbsorbRadiation(1);
+            AbsorbRadiation(5);
         }
         if(other.gameObject.tag == "Bullet")
         {
