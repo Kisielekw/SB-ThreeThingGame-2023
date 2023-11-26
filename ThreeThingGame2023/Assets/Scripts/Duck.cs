@@ -25,6 +25,8 @@ public class Duck : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PauseManager.GetComponent<PauseManager>().AddObject(gameObject);
+
         pause = false;
 
         health = 100;

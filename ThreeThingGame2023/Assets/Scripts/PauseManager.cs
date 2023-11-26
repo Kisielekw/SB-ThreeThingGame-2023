@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    GameObject[] objects;
+    List<GameObject> objects;
+
+    private void Start()
+    {
+        objects = new List<GameObject>();
+    }
+
+    public void AddObject(GameObject obj)
+    {
+        objects.Add(obj);
+    }
+
+    public void RemoveObject(GameObject obj)
+    {
+           objects.Remove(obj);
+    }
 
     public void SetPause(bool pPause)
     {
-        objects = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in objects)
         {
             if (obj.tag == "Player")

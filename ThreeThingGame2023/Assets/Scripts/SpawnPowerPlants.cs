@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpawnPowerPlants : MonoBehaviour
 {
+    public GameObject PauseManager;
+
     public Vector3[] spawnPoints;
 
     public GameObject powerPlant;
@@ -23,6 +25,7 @@ public class SpawnPowerPlants : MonoBehaviour
         for(int i = 0; i <= 26; i++)
         {
             GameObject newObject = Instantiate(powerPlant, spawnPoints[Random.Range(0, 26)], Quaternion.identity);
+            PauseManager.GetComponent<PauseManager>().AddObject(newObject);
         }
     }
 
@@ -38,6 +41,7 @@ public class SpawnPowerPlants : MonoBehaviour
             Vector3 upDirection = (newObject.GetComponent<Transform>().position - GameObject.Find("Planet").GetComponent<Transform>().position).normalized;
             Quaternion rotation = Quaternion.LookRotation(Vector3.forward, upDirection);
             newObject.GetComponent<Transform>().rotation = rotation;
+            PauseManager.GetComponent<PauseManager>().AddObject(newObject);
             lastSpawnTime = Time.time;
         }
     }
