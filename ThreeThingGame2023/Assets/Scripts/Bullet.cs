@@ -8,6 +8,6 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Vector3 direction = (GameObject.Find("Player").GetComponent<Transform>().position - GetComponent<Transform>().position).normalized;
-        GetComponent<Rigidbody>().velocity = direction * 1.5f;
+        GetComponent<Rigidbody>().velocity = direction * 5f;
     }
 }
