@@ -21,9 +21,14 @@ public class Duck : MonoBehaviour
 
     public Image healthBar, radiationBar;
 
+    public AudioClip[] Music;
+    public AudioClip LevelUp, Death;
+
     // Start is called before the first frame update
     void Start()
     {
+        GetComponent<AudioSource>().clip = Music[0];
+
         PauseManager.GetComponent<PauseManager>().AddObject(gameObject);
 
         pause = false;
@@ -39,6 +44,12 @@ public class Duck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GetComponent<AudioSource>().isPlaying == false)
+        {
+            GetComponent<AudioSource>().clip = Music[1];
+            GetComponent<AudioSource>().Play();
+        }
+
         if (pause)
             return;
 
@@ -71,6 +82,8 @@ public class Duck : MonoBehaviour
         if(health <= 0)
         {
             DeathScreen.SetActive(true);
+            GetComponent<AudioSource>().clip = Death;
+            GetComponent<AudioSource>().Play();
         }
     }
 
@@ -88,6 +101,9 @@ public class Duck : MonoBehaviour
 
     public void ResetRadiation()
     {
+        GetComponent<AudioSource>().clip = LevelUp;
+        GetComponent<AudioSource>().Play();
+
         LevelScreen.SetActive(true);
         PauseManager.GetComponent<PauseManager>().SetPause(true);
 
