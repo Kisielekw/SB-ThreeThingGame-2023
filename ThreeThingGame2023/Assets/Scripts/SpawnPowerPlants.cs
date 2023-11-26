@@ -8,7 +8,7 @@ public class SpawnPowerPlants : MonoBehaviour
 
     public GameObject powerPlant;
 
-    public int timeInterval;
+    public int timeInterval = 5;
 
     private float lastSpawnTime;
 
@@ -22,7 +22,7 @@ public class SpawnPowerPlants : MonoBehaviour
 
         for(int i = 0; i <= 26; i++)
         {
-               Instantiate(powerPlant, spawnPoints[i], Quaternion.identity);
+            GameObject newObject = Instantiate(powerPlant, spawnPoints[Random.Range(0, 26)], Quaternion.identity);
         }
     }
 
@@ -34,7 +34,10 @@ public class SpawnPowerPlants : MonoBehaviour
 
         if(Time.time - lastSpawnTime >= timeInterval)
         {
-            Instantiate(powerPlant, spawnPoints[Random.Range(0, 26)], Quaternion.identity);
+            GameObject newObject = Instantiate(powerPlant, spawnPoints[Random.Range(0, 26)], Quaternion.identity);
+            Vector3 upDirection = (newObject.GetComponent<Transform>().position - GameObject.Find("Planet").GetComponent<Transform>().position).normalized;
+            Quaternion rotation = Quaternion.LookRotation(Vector3.forward, upDirection);
+            newObject.GetComponent<Transform>().rotation = rotation;
             lastSpawnTime = Time.time;
         }
     }

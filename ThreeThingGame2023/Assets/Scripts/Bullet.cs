@@ -4,22 +4,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private bool pause;
-    
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void SetPause(bool pPause)
-    {
-        pause = pPause;
+        Vector3 direction = (GameObject.Find("Player").GetComponent<Transform>().position - GetComponent<Transform>().position).normalized;
+        GetComponent<Rigidbody>().velocity = direction * 1.5f;
     }
 }

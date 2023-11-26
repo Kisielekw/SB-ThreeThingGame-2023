@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Radiation
+  - Enemy
+  - Bullet
+  - Planet
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,9 @@ public class Duck : MonoBehaviour
     private int health, radiation, radiationNextLevel;
     private bool pause;
 
+    private int damage;
+    private float speed;
+
     public GameObject PauseManager;
 
     public GameObject LevelScreen, DeathScreen;
@@ -106,5 +109,25 @@ public class Duck : MonoBehaviour
             Destroy(other.gameObject);
             AbsorbRadiation(1);
         }
+        if(other.gameObject.tag == "Bullet")
+        {
+            Destroy(other.gameObject);
+            Damage(5);
+        }
+    }
+
+    public void IncreaseDamage(int pDamage)
+    {
+        damage += pDamage;
+    }
+
+    public void IncreaseSpeed(float pSpeed)
+    {
+        speed += pSpeed;
+    }
+
+    public void IncreaseHealth(int pHealth)
+    {
+        health += pHealth;
     }
 }
