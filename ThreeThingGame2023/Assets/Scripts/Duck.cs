@@ -43,21 +43,21 @@ public class Duck : MonoBehaviour
             return;
 
         gravity = (Planet.transform.position - transform.position).normalized;
-
-        if(Input.GetKey(KeyCode.W))
-            transform.Translate(new Vector3(0, 0, 10) * Time.deltaTime);
-        if(Input.GetKey(KeyCode.S))
-            transform.Translate(new Vector3(0, 0, -10) * Time.deltaTime);
-        if(Input.GetKey(KeyCode.A))
-            transform.Translate(new Vector3(-10, 0, 0) * Time.deltaTime);
-        if(Input.GetKey(KeyCode.D))
-            transform.Translate(new Vector3(10, 0, 0) * Time.deltaTime);
     }
 
     void FixedUpdate()
     {
         if (pause)
             return;
+
+        if (Input.GetKey(KeyCode.W))
+            transform.Translate(new Vector3(0, 0, 10) * Time.deltaTime);
+        if (Input.GetKey(KeyCode.S))
+            transform.Translate(new Vector3(0, 0, -10) * Time.deltaTime);
+        if (Input.GetKey(KeyCode.A))
+            transform.Translate(new Vector3(-10, 0, 0) * Time.deltaTime);
+        if (Input.GetKey(KeyCode.D))
+            transform.Translate(new Vector3(10, 0, 0) * Time.deltaTime);
 
         GetComponent<Rigidbody>().AddForce(gravity * 9.81f);
     }

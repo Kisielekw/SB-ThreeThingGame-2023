@@ -31,8 +31,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gravity = (GameObject.Find("Planet").GetComponent<Transform>().position - GetComponent<Transform>().position).normalized;
-
         switch (state)
         {
             case State.Idle:
@@ -42,11 +40,6 @@ public class Enemy : MonoBehaviour
                 Shooting();
                 break;
         }
-    }
-
-    void FixedUpdate()
-    {
-        GetComponent<Rigidbody>().AddForce(gravity * 9.81f);
     }
 
     public void SetPause(bool pPause)
